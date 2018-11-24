@@ -1,0 +1,12 @@
+baseurl = "https://songyintao.github.io"
+title = "Gilfoyle Blogs"
+author = "@Gilfoyle.Song"
+copyright = "Copyright © 2018–2018, @Gilfoyle"
+canonifyurls = true
+paginate = 3
+
+theme = "jeffprod"
+
+[taxonomies]
+    tag = "tags"
+    archive = "archives"
