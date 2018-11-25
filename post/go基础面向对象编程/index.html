@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Gilfoyle Blogs  | 2018</title>
+    <title>Gilfoyle Blogs  | Go基础：面向对象编程</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -28,7 +28,7 @@
                 <br>
                 <h1 class="title is-size-1">
                     
-                        Archive 2018
+                        Go基础：面向对象编程
                     
                 </h1>
                 
@@ -41,42 +41,107 @@
     <div class="section">
     
 
-
 <div class="columns">
     <div class="column is-9">
         <div class="tile is-child box">
             <div class="content">
+                
 
-                <article class="media">
-                    <div class="media-content">
-                        <div class="content">
-                            <p class="title is-4"><a href="https://songyintao.github.io/post/go%E5%9F%BA%E7%A1%80%E9%A1%BA%E5%BA%8F%E7%BC%96%E7%A8%8B/">Go基础：顺序编程</a></p>
-                            <p class="subtitle is-size-6 has-text-grey-light">
-                                Published at November 25, 2018 &middot;
-                                <i class="far fa-clock"></i>&nbsp;1 min read
-                            </p>
-                            <p>变量 //变量声明 var v1 int var v2 string var v3 [10]int //array var v4 []int //slice var v5 struct{ f int } var v6 *int //pointer var v7 map[string]int //map,key:string ,value:int var v8 func(a int) int var( v1 int v2 string ) //变量初始化 var v1 int=10 var v2 =10 v3:=10 //变量赋值 var v10 int v10=123 i,j=j,i  常量 //字面常量：程序中硬编码的常量 -12 &quot;foo&quot; true //常量定义 const pi float64=3.1415124141 const zero=0.0 const( size int64 =1024 eof=-1 ) const u,v float32=0,3 const a,b,c=3,4,&quot;foo&quot; //常量定义的右值可以是一个在编译期运算的常量表达式： const mask =1&lt;&lt;3 // 注意：常量的赋值是一个编译期行为，所以 值不能出现任何需要 行期才能得出结果的表达式 //预定义常量 Go语言预定义了这些常量：true、false、iota。iota在每一个const关键字出现时重置为0，然后在下一次const出现之前，每出现一次iota，其代表的数字会自动增1....</p>
-                        </div>
-                    </div>
-                </article>
-                <br>
+<p>如果想要改变变量的值，只能传递指针。</p>
 
-                <article class="media">
-                    <div class="media-content">
-                        <div class="content">
-                            <p class="title is-4"><a href="https://songyintao.github.io/post/go%E5%9F%BA%E7%A1%80%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">Go基础：面向对象编程</a></p>
-                            <p class="subtitle is-size-6 has-text-grey-light">
-                                Published at November 25, 2018 &middot;
-                                <i class="far fa-clock"></i>&nbsp;1 min read
-                            </p>
-                            <p>如果想要改变变量的值，只能传递指针。
-类型系统 1.值语意、引用语义 ​ 值语意：
-b=a b.Modify()  如果b的修改不会影响a的值，那么这个类型属于值类型。如果会影响a的值，那么此类型为引用类型。
-2.结构体 type Rect struct{ x,y float64 width,height float64 } //define a member method to cal area func (r *Rect) Area() float64{ return r.width*r.height }  3.初始化 rect1:= new (Rect) rect2:=&amp;Rect{} rect3:=&amp;Rect{0,0,100,200} rect4:=&amp;Rect{width:100,heigth:200} func NewRect(x,y,width,height float)  4. 匿名组合 type X struct{ Name string } type Y struct{ X *log.Logger NNN string }  接口 1. 接口查询 var file Writer=... if file5,ok:=file1....</p>
-                        </div>
-                    </div>
-                </article>
-                <br>
+<h3 id="类型系统">类型系统</h3>
+
+<h4 id="1-值语意-引用语义">1.值语意、引用语义</h4>
+
+<p>​   <strong>值语意</strong>：</p>
+
+<pre><code class="language-go">b=a
+b.Modify()
+</code></pre>
+
+<p>如果b的修改不会影响a的值，那么这个类型属于值类型。如果会影响a的值，那么此类型为引用类型。</p>
+
+<h4 id="2-结构体">2.结构体</h4>
+
+<pre><code class="language-go">type Rect struct{
+    x,y float64
+    width,height float64
+}
+//define a member method to cal area
+func (r *Rect) Area() float64{
+    return r.width*r.height
+}
+</code></pre>
+
+<h4 id="3-初始化">3.初始化</h4>
+
+<pre><code class="language-go">rect1:= new (Rect)
+rect2:=&amp;Rect{}
+rect3:=&amp;Rect{0,0,100,200}
+rect4:=&amp;Rect{width:100,heigth:200}
+
+
+func NewRect(x,y,width,height float)
+</code></pre>
+
+<h4 id="4-匿名组合">4. 匿名组合</h4>
+
+<pre><code class="language-go">type X struct{
+    Name string
+}
+
+type Y struct{
+    X
+    *log.Logger
+    NNN string
+}
+</code></pre>
+
+<h3 id="接口">接口</h3>
+
+<h4 id="1-接口查询">1. 接口查询</h4>
+
+<pre><code class="language-go">var file Writer=...
+if file5,ok:=file1.(two.IStream);ok{
+    ...
+}
+
+</code></pre>
+
+<h4 id="2-类型查询">2.类型查询</h4>
+
+<pre><code class="language-go">var v1 interface{}=,,,
+switch v:=v1.(type){
+    case int:
+    case string:
+    ...
+}
+</code></pre>
+
+<h4 id="3-接口组合">3.接口组合</h4>
+
+<pre><code class="language-go">type ReadWriter interface{
+    Reader
+    Writer
+}
+//这个接口组合了Reader和Writer两个接口
+</code></pre>
+
+<h4 id="4-any类型">4.Any类型</h4>
+
+<p>​   由于Go语言中任何对象实例都 足 接口interface{}，所以interface{}看起来 是可以指向任何对象的Any类型。</p>
+
+<pre><code class="language-go">var v1 interface{}=1  //int 赋值给interface{}
+var v2 interface{}=&quot;abc&quot;
+var v3 interface{}=&amp;v2 //将*interface{} 赋值给interface{}
+var v4 interface{}=struct{X int}{1}
+var v5 interface{}=&amp;struct{X int}{1}
+...
+
+func Printf(args ...interface{})
+...
+
+</code></pre>
 
             </div>
         </div>
@@ -116,7 +181,6 @@ b=a b.Modify()  如果b的修改不会影响a的值，那么这个类型属于�
 
     </div>
 </div>
-
 
 
     </div>

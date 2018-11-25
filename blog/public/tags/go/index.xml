@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gilfoyle Blogs</title>
-    <link>https://songyintao.github.io/</link>
-    <description>Recent content on Gilfoyle Blogs</description>
+    <title>Go on Gilfoyle Blogs</title>
+    <link>https://songyintao.github.io/tags/go/</link>
+    <description>Recent content in Go on Gilfoyle Blogs</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Copyright © 2018–2018, @Gilfoyle</copyright>
     <lastBuildDate>Sun, 25 Nov 2018 21:23:18 +0800</lastBuildDate>
     
-	<atom:link href="https://songyintao.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://songyintao.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>

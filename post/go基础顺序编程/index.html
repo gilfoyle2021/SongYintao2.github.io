@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gilfoyle Blogs  | Go基础：顺序编程</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://songyintao.github.io/css/blog.css" />
+</head>
+<body>
+
+    
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://songyintao.github.io">Home</a>
+        </div>
+    </nav>
+    
+
+    
+    <section class="hero is-info is-medium">
+        <div class="hero-body" style="background-image: url(https://songyintao.github.io/img/bg-blog.jpg);">
+            <div class="container has-text-centered">
+                <br>
+                <h1 class="title is-size-1">
+                    
+                        Go基础：顺序编程
+                    
+                </h1>
+                
+            </div>
+        </div>
+    </section>
+
+
+<div class="container">
+    <div class="section">
+    
+
+<div class="columns">
+    <div class="column is-9">
+        <div class="tile is-child box">
+            <div class="content">
+                
+
+<h3 id="变量">变量</h3>
+
+<pre><code class="language-go">//变量声明
+var v1 int
+var v2 string
+var v3 [10]int  //array
+var v4 []int //slice
+var v5 struct{
+    f int
+}
+var v6 *int  //pointer
+var v7 map[string]int //map,key:string ,value:int
+var v8 func(a int) int
+
+var(
+	v1 int
+    v2 string
+)
+//变量初始化
+var v1 int=10
+var v2 =10
+v3:=10
+
+//变量赋值
+
+var v10 int
+v10=123
+
+i,j=j,i
+</code></pre>
+
+<h3 id="常量">常量</h3>
+
+<pre><code class="language-go">//字面常量：程序中硬编码的常量
+-12
+&quot;foo&quot;
+true
+//常量定义
+const pi float64=3.1415124141
+const zero=0.0
+const(
+	size int64 =1024
+    eof=-1
+)
+const u,v float32=0,3
+const a,b,c=3,4,&quot;foo&quot;
+//常量定义的右值可以是一个在编译期运算的常量表达式：
+const mask =1&lt;&lt;3
+// 注意：常量的赋值是一个编译期行为，所以 值不能出现任何需要 行期才能得出结果的表达式
+
+
+//预定义常量
+Go语言预定义了这些常量：true、false、iota。iota在每一个const关键字出现时重置为0，然后在下一次const出现之前，每出现一次iota，其代表的数字会自动增1.
+
+//枚举
+const(
+	Sunday=iota
+    Monday
+    Tuesday
+    Wednesday
+    Thursday
+    Friday
+    Saturday
+    numberOfDays //
+)
+</code></pre>
+
+<h3 id="类型">类型</h3>
+
+<p>Go语言内置以下这些基础类型：</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 布尔类型：bool</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 整型：int8、byte、int16、int、uint、uintptr等</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 浮点类型：float32、float64.</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 复数类型：complex64、complex128</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 字符串：string</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 字符类型：rune</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 错误类型：error</label></li>
+</ul>
+
+<p>此外，Go 语言也支持以下复合类型：</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" disabled class="task-list-item"> 指针（pointer）</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 数组（array）</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 切片（slice）</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 字典（map）</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 通道（chan）</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 结构体（struct）</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> 接口（interface）</label></li>
+</ul>
+
+<h3 id="错误处理">错误处理</h3>
+
+<h4 id="1-error接口">1.error接口</h4>
+
+<p>Go语言引入了一个关于错误处理的标准模式，即error接口，该接口的定义如下：</p>
+
+<pre><code class="language-go">type error interface {
+    Error() string
+}
+</code></pre>
+
+<p>​   我们可以实现error接口，自定义错误。</p>
+
+<h4 id="2-defer">2. defer</h4>
+
+<p>​   类似于C++里面的析构函数用于释放资源。一个函数中可以存在多个defer语句，因此我们要注意defer语句的调用遵照先进后出的原则，即最后一个defer语句将最先被执行。</p>
+
+<h4 id="3-panic-和recover">3.panic()和recover()</h4>
+
+<p>​   Go语言引入了两个内置函数<code>panic()</code>和<code>recover()</code>来报告和处理运行时错误和程序中的错误场景：</p>
+
+<pre><code class="language-go">func panic(interface{})
+func recover() interface{}
+</code></pre>
+
+<p>​   当在一个函数执行过程中调用<code>panic()</code>函数时，正常的函数执行流程将立即终止，但函数中之前使用<code>defer</code>关键字延迟执行的语句将正常展开执行，之后该函数将返回到调用函数，并导致逐层的向上执行<code>panic</code>流程，直至所属的goroutine中所有正在执行的函数被终止。错误信息将被上报，包括在调用panic()函数时传入的参数，这个过程称之为错误处理流程。</p>
+
+<p>​   recover()函数用于中止错误处理的流程。一般，recover()应该在一个使用defer关键字的函数中执行以有效截取错误处理流程。如果没有在发生异常的goroutine中明确调用recover关键字的恢复过程，会导致该goroutine所属的进程打印异常信息后直接退出。</p>
+
+<pre><code class="language-go">defer func(){
+    if r:=recover();r!=nil{
+        log.Printf(&quot;Runtime error caugth:%v&quot;,r)
+    }
+}
+foo()
+</code></pre>
+
+<p>​   无论foo()中是否出发了错误处理流程，该匿名函数defer函数都将在函数退出时得到执行。假如foo中触发了错误处理流程，recover函数将使得该错误处理过程终止。如果错误处理流程被触发时，程序传给panic的参数不为空，则该函数会打印详细的错误信息。</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="column is-3">
+        <div class="card">
+    <div class="card-content">
+        <h1 class="title is-5">Tags</h1>
+        <div class="tags">
+        
+            <span class="tag"><a href="https://songyintao.github.io/tags/go">go</a></span>
+        
+        </div>          
+    </div>
+</div><br>
+        <div class="card">
+    <div class="card-content">
+        <h1 class="title is-5">Recent posts</h1>
+        
+            <h1><a href="https://songyintao.github.io/post/go%E5%9F%BA%E7%A1%80%E9%A1%BA%E5%BA%8F%E7%BC%96%E7%A8%8B/">Go基础：顺序编程</a></h1>
+            <time class="has-text-grey-light is-size-7">25 November 2018</time>
+        
+            <h1><a href="https://songyintao.github.io/post/go%E5%9F%BA%E7%A1%80%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/">Go基础：面向对象编程</a></h1>
+            <time class="has-text-grey-light is-size-7">25 November 2018</time>
+        
+    </div>
+</div>
+    <br>
+        <div class="card">
+    <div class="card-content">
+        <h1 class="title is-5">Archives</h1>
+        
+            <a href="https://songyintao.github.io/archives/2018">2018</a> (2)<br>
+        
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+    </div>
+</div>
+
+<footer class="footer has-background-grey-darker has-text-white">
+    <div class="content has-text-centered">
+        <p>
+            <span class="icon is-large"><a href="https://twitter.com/" class="mysocial"><i class="fab fa-twitter fa-3x"></i></a></span>&nbsp;&nbsp;
+            <span class="icon is-large"><a href="https://www.youtube.com/" class="mysocial"><i class="fab fa-youtube fa-3x"></i></a></span>&nbsp;&nbsp;
+            <span class="icon is-large"><a href="https://github.com/" class="mysocial"><i class="fab fa-github fa-3x"></i></a></span>&nbsp;&nbsp;
+            <br><br>
+            Copyright &copy; Gilfoyle Blogs 2018 - Theme by <a href="https://jeffprod.com" class="mysocial">JeffProd.com</a>
+            - <a class="mysocial" href="https://songyintao.github.io/about">About</a>
+        </p>
+    </div>
+</footer>
+
+<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+</body>
+</html>
